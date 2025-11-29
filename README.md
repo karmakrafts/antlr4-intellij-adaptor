@@ -1,4 +1,13 @@
-# ANTLRv4 support in IntelliJ IDEs [![Java CI](https://github.com/antlr/antlr4-intellij-adaptor/actions/workflows/gradle.yml/badge.svg)](https://github.com/antlr/antlr4-intellij-adaptor/actions/workflows/gradle.yml) [![Maven Central](https://img.shields.io/maven-central/v/org.antlr/antlr4-intellij-adaptor.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22org.antlr%22%20AND%20a:%22antlr4-intellij-adaptor%22)
+# ANTLRv4 support in IntelliJ IDEs
+
+[![](https://git.karmakrafts.dev/kk/antlr4-intellij-adaptor/badges/master/pipeline.svg)](https://git.karmakrafts.dev/kk/antlr4-intellij-adaptor/-/pipelines)
+[![](https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Frepo.maven.apache.org%2Fmaven2%2Fdev%2Fkarmakrafts%2Fantlr4%2Fantlr4-intellij-adaptor%2Fmaven-metadata.xml
+)](https://git.karmakrafts.dev/kk/antlr4-intellij-adaptor/-/packages)
+[![](https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Fcentral.sonatype.com%2Frepository%2Fmaven-snapshots%2Fdev%2Fkarmakrafts%2Fantlr4%2Fantlr4-intellij-adaptor%2Fmaven-metadata.xml
+)](https://git.karmakrafts.dev/kk/antlr4-intellij-adaptor/-/packages)
+
+**This is a fork of the original library to update tooling and provide more regular fixes and builds if needed.**  
+**Check out the original project [here](https://github.com/antlr/antlr4-intellij-adaptor)**
 
 A library to support the use of ANTLRv4 grammars for custom languages in IntelliJ-based IDEs plug-in development.
 
@@ -20,7 +29,7 @@ repositories {
 }
 
 dependencies {
-    compile "org.antlr:antlr4-intellij-adaptor:0.1"
+    compile "dev.karmakrafts.antlr4:antlr4-intellij-adaptor:VERSION"
 }
 ```
 
@@ -28,9 +37,9 @@ In Maven builds, use:
 
 ```xml
 <dependency>
-  <groupId>org.antlr</groupId>
+  <groupId>dev.karmakrafts.antlr4</groupId>
   <artifactId>antlr4-intellij-adaptor</artifactId>
-  <version>0.1</version>
+  <version>VERSION</version>
 </dependency>
 ```
 
@@ -45,9 +54,3 @@ Here is a list of known plugins that use the adaptor:
 * [Pebble plugin](https://github.com/bjansen/pebble-intellij)
 
 Other usages can be [found on GitHub](https://github.com/search?p=1&q=ANTLRParserAdaptor&type=Code)
-
-## Migration from the pre-Maven version
-
-Before 0.1, it was recommended to add this Git repo as a submodule of your own project, or to copy the source files directly.
-
-It is now recommended to use the Maven dependency. The main **breaking change** is that the base package has been renamed from `org.antlr.jetbrains.adaptor` to `org.antlr.intellij.adaptor`
