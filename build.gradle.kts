@@ -6,6 +6,7 @@ import dev.karmakrafts.conventions.setRepository
 import dev.karmakrafts.conventions.signPublications
 import org.jetbrains.intellij.platform.gradle.TestFrameworkType
 import java.time.Duration
+import java.time.ZonedDateTime
 
 plugins {
     `java-library`
@@ -14,6 +15,7 @@ plugins {
     alias(libs.plugins.gradleNexus)
     alias(libs.plugins.karmaConventions)
     alias(libs.plugins.intelliJPlatform)
+    alias(libs.plugins.dokka)
 }
 
 group = "dev.karmakrafts.antlr4"
@@ -23,7 +25,6 @@ configureJava(libs.versions.java)
 
 java {
     withSourcesJar()
-    withJavadocJar()
 }
 
 repositories {
@@ -72,7 +73,30 @@ intellijPlatform {
     buildSearchableOptions = false
 }
 
+dokka {
+    moduleName = project.name
+    pluginsConfiguration {
+        html {
+            footerMessage = "(c) ${ZonedDateTime.now().year} Antlr Project"
+        }
+    }
+}
+
+val dokkaJar by tasks.registering(Jar::class) {
+    group = "dokka"
+    from(tasks.dokkaGeneratePublicationHtml.flatMap { it.outputDirectory })
+    archiveClassifier.set("javadoc")
+}
+
 tasks {
+    System.getProperty("publishDocs.root")?.let { docsDir ->
+        register("publishDocs", Copy::class) {
+            dependsOn(dokkaJar)
+            mustRunAfter(dokkaJar)
+            from(zipTree(dokkaJar.get().outputs.files.first()))
+            into(docsDir)
+        }
+    }
     buildPlugin {
         enabled = false
     }
