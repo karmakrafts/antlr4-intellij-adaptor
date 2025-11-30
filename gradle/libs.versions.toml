@@ -7,13 +7,16 @@ karmaConventions = "1.8.1" # https://github.com/karmakrafts/karma-conventions/ta
 intelliJPlatform = "2.10.5" # https://github.com/JetBrains/intellij-platform-gradle-plugin/releases
 gradleNexus = "2.0.0" # https://github.com/gradle-nexus/publish-plugin/releases
 dokka = "2.1.0" # https://github.com/Kotlin/dokka/releases
-junit = "4.13.2" # TODO: update
+junit = "4.13.2"
+junitPlatformLauncher = "1.14.1"
 openTest4j = "1.3.0" # TODO: update/replace
 
 [libraries]
 
+antlr4 = { module = "org.antlr:antlr4", version.ref = "antlr4" }
 antlr4-runtime = { module = "org.antlr:antlr4-runtime", version.ref = "antlr4" }
 junit = { module = "junit:junit", version.ref = "junit" }
+junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher", version.ref = "junitPlatformLauncher" }
 openTest4j = { module = "org.opentest4j:opentest4j", version.ref = "openTest4j" }
 
 [plugins]

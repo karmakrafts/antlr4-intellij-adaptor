@@ -12,6 +12,7 @@ plugins {
     `java-library`
     `maven-publish`
     signing
+    antlr
     alias(libs.plugins.gradleNexus)
     alias(libs.plugins.karmaConventions)
     alias(libs.plugins.intelliJPlatform)
@@ -35,17 +36,19 @@ repositories {
 }
 
 dependencies {
+    antlr(libs.antlr4)
     intellijPlatform {
         create(providers.gradleProperty("platformType"), providers.gradleProperty("platformVersion"))
         bundledPlugins(providers.gradleProperty("platformBundledPlugins").map { it.split(',') })
         plugins(providers.gradleProperty("platformPlugins").map { it.split(',') })
         bundledModules(providers.gradleProperty("platformBundledModules").map { it.split(',') })
-        testFramework(TestFrameworkType.Plugin.Java)
+        testFramework(TestFrameworkType.Platform)
     }
     implementation(libs.antlr4.runtime) {
         exclude(group = "com.ibm.icu", module = "icu4j")
     }
     testImplementation(libs.junit)
+    testImplementation(libs.junit.platform.launcher)
     testImplementation(libs.openTest4j)
 }
 
@@ -99,8 +102,5 @@ tasks {
     }
     buildPlugin {
         enabled = false
-    }
-    test {
-        useJUnitPlatform()
     }
 }
