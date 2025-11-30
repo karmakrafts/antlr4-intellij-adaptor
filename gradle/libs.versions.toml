@@ -1,7 +1,7 @@
 [versions]
 
 java = "17"
-antlr4Adaptor = "0.2.1"
+antlr4Adaptor = "0.2.2"
 antlr4 = "4.13.2"
 karmaConventions = "1.8.1" # https://github.com/karmakrafts/karma-conventions/tags
 intelliJPlatform = "2.10.5" # https://github.com/JetBrains/intellij-platform-gradle-plugin/releases

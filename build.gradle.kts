@@ -2,6 +2,7 @@ import dev.karmakrafts.conventions.GitLabCI
 import dev.karmakrafts.conventions.authenticatedSonatype
 import dev.karmakrafts.conventions.configureJava
 import dev.karmakrafts.conventions.defaultDependencyLocking
+import dev.karmakrafts.conventions.setProjectInfo
 import dev.karmakrafts.conventions.setRepository
 import dev.karmakrafts.conventions.signPublications
 import org.jetbrains.intellij.platform.gradle.TestFrameworkType
@@ -57,7 +58,16 @@ publishing {
         create<MavenPublication>("library") {
             from(components["java"])
         }
+        withType<MavenPublication> {
+            pom.licenses {
+                license {
+                    name = "BSD-2-Clause license"
+                    url = "https://opensource.org/license/bsd-2-clause"
+                }
+            }
+        }
     }
+    setProjectInfo("antlr4-intellij-adaptor", "A library to support the use of ANTLR grammars in jetbrains IDE plugins for building custom languages.")
     setRepository("git.karmakrafts.dev", "kk/antlr4-intellij-adaptor")
     with(GitLabCI) { karmaKraftsDefaults() }
 }
